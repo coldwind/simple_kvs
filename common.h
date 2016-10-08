@@ -7,6 +7,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <sys/epoll.h>
 
 #include "kvs_mem.h"
 #include "ini.h"
@@ -16,6 +17,7 @@
 #define K_NULL NULL
 #define null NULL
 #define K_IS_NULL(x) (x==K_NULL)
+#define EPOLL_CREATE_SIZE 256
 
 /* memeroy */
 #define K_MALLOC(size) kvs_malloc(size)
