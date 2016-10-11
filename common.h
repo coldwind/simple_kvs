@@ -8,6 +8,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/epoll.h>
+#include <strings.h>
+#include <string.h>
 
 #include "kvs_mem.h"
 #include "ini.h"

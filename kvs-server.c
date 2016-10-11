@@ -8,7 +8,7 @@ int main() {
     const char *protocol = ini_get(config, "base", "protocol");
     const char *bind_ip_s = ini_get(config, "base", "ip");
     const char *port_s = ini_get(config, "base", "port");
-    const char *data_dir_s = ini_get(config, "base", "data_dir");
+    // const char *data_dir_s = ini_get(config, "base", "data_dir");
     const char *backlog_s = ini_get(config, "base", "backlog");
 
     int backlog = atoi(backlog_s);
