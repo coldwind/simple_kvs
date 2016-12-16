@@ -22,8 +22,10 @@
 #define EPOLL_CREATE_SIZE 256
 
 /* memeroy */
-#define K_MALLOC(size) kvs_malloc(size)
-#define K_FREE(kpoint) kvs_free(kpoint)
+#define K_TABLE_INIT(kpoint) kvs_table_init(kpoint);
+#define K_TABLE_MALLOC(size) kvs_table_malloc(size);
+#define K_TABLE_FREE(kpoint) kvs_table_free(kpoint);
+#define DEFAULT_HASH_CONTAINER 16
 
 /* error keyword */
 #define K_ERR_P(msg,type) kvs_err_print(msg,type)

@@ -1,8 +1,10 @@
 #include "common.h"
 
+KVS_TABLE *kvs_table;
+
 int main() {
 
-    ini_t *config = ini_load("etc/kvs.ini");
+    ini_t *config = ini_load("../etc/kvs.ini");
 
     // get config
     const char *protocol = ini_get(config, "base", "protocol");
@@ -16,6 +18,7 @@ int main() {
     int sockfd;
 
     // init memory
+    K_TABLE_INIT(&kvs_table)
 
     // init network
     if (strcmp(protocol, K_P_TCP) == 0) {
