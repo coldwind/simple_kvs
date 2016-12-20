@@ -13,7 +13,7 @@ typedef struct{
     unsigned int vector_size;
 
     // 容器
-    kvs_mem_data *data[];
+    kvs_mem_data *data[DEFAULT_HASH_CONTAINER];
 
 } KVS_TABLE;
 
@@ -24,3 +24,4 @@ void kvs_table_init(KVS_TABLE **);
 void kvs_table_set(char *, void *);
 void kvs_table_get(char *);
 void kvs_table_remove(char *);
+static uint32_t kvs_get_index(char *key);

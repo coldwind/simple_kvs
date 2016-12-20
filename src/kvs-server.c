@@ -1,6 +1,7 @@
 #include "common.h"
 
 KVS_TABLE *kvs_table;
+uint32_t container_size = DEFAULT_HASH_CONTAINER;
 
 int main() {
 
