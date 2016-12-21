@@ -1,10 +1,6 @@
 #include "common.h"
 
-void *kvs_table_malloc(size_t size) {
-
-    if (size <= 0) {
-        return NULL;
-    }
+void *kvs_table_malloc() {
 
     return malloc(sizeof(KVS_TABLE));
 }
@@ -14,16 +10,21 @@ void kvs_table_free(void *mp) {
 }
 
 void kvs_table_init(KVS_TABLE **kv_table) {
-    *kv_table = (KVS_TABLE *)K_TABLE_MALLOC(DEFAULT_HASH_CONTAINER)
+    *kv_table = (KVS_TABLE *)K_TABLE_MALLOC()
+    (*kv_table)->count = 0;
+    (*kv_table)->vector_size = DEFAULT_HASH_CONTAINER;
 }
 
 void kvs_table_set(char *name, void *value) {
     uint32_t index = kvs_get_index(name);
-    kvs_table
 }
 
-void kvs_table_get(char *name) {
+void *kvs_table_get(char *name) {
     uint32_t index = kvs_get_index(name);
+
+    if (index >= container_size) {
+        return 0;
+    }
 }
 
 void kvs_table_remove(char *name) {
@@ -36,6 +37,8 @@ static uint32_t kvs_get_index(char *key) {
         hash = hash * 33 + (int)*key;
         key++;
     }
+
+    hash %= container_size;
 
     return hash;
 }

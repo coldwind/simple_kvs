@@ -11,11 +11,6 @@
 #include <strings.h>
 #include <string.h>
 
-#include "kvs_mem.h"
-#include "ini.h"
-#include "networking.h"
-#include "kerr.h"
-
 #define K_NULL NULL
 #define null NULL
 #define K_IS_NULL(x) (x==K_NULL)
@@ -38,5 +33,10 @@
 /* protocol */
 #define K_P_TCP "tcp"
 #define K_P_UNIX_DOMAIN "unix_domain"
+
+#include "kvs_mem.h"
+#include "ini.h"
+#include "networking.h"
+#include "kerr.h"
 
 #endif

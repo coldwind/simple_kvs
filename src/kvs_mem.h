@@ -17,11 +17,11 @@ typedef struct{
 
 } KVS_TABLE;
 
-void *kvs_table_malloc(size_t);
+void *kvs_table_malloc();
 void kvs_table_free(void *);
 
 void kvs_table_init(KVS_TABLE **);
 void kvs_table_set(char *, void *);
-void kvs_table_get(char *);
+void *kvs_table_get(char *);
 void kvs_table_remove(char *);
 static uint32_t kvs_get_index(char *key);
