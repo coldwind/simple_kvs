@@ -25,3 +25,5 @@ void kvs_table_set(char *, void *);
 void *kvs_table_get(char *);
 void kvs_table_remove(char *);
 static uint32_t kvs_get_index(char *key);
+
+extern uint32_t container_size;

@@ -10,15 +10,25 @@
 #include <sys/epoll.h>
 #include <strings.h>
 #include <string.h>
+#include "kerr.h"
 
 #define K_NULL NULL
 #define null NULL
 #define K_IS_NULL(x) (x==K_NULL)
 #define EPOLL_CREATE_SIZE 256
 
+/* debug flag */
+#define DEBUG 1
+
+#if DEBUG == 1
+#define DEBUG_PRINT(info) kvs_debug_info(info)
+#else
+#define DEBUG_PRINT(info)
+#endif
+
 /* memeroy */
 #define K_TABLE_INIT(kpoint) kvs_table_init(kpoint);
-#define K_TABLE_MALLOC(size) kvs_table_malloc(size);
+#define K_TABLE_MALLOC() kvs_table_malloc();
 #define K_TABLE_FREE(kpoint) kvs_table_free(kpoint);
 #define DEFAULT_HASH_CONTAINER 16
 
@@ -33,10 +43,5 @@
 /* protocol */
 #define K_P_TCP "tcp"
 #define K_P_UNIX_DOMAIN "unix_domain"
-
-#include "kvs_mem.h"
-#include "ini.h"
-#include "networking.h"
-#include "kerr.h"
 
 #endif
