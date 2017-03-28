@@ -26,7 +26,12 @@ void kvs_err_print(char *error, uint8_t type)
     }
 }
 
-void kvs_debug_info(char *info)
+void kvs_debug_info_s(char *info)
 {
     printf("KVS DEBUG:%s\n", info);
+}
+
+void kvs_debug_info_d(double info)
+{
+    printf("KVS DEBUG:%f\n", info);
 }

@@ -18,6 +18,7 @@ typedef struct{
 } KVS_TABLE;
 
 void *kvs_table_malloc();
+kvs_mem_data *kvs_node_malloc();
 void kvs_table_free(void *);
 
 void kvs_table_init(KVS_TABLE **);

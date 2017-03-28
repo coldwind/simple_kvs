@@ -21,15 +21,17 @@
 #define DEBUG 1
 
 #if DEBUG == 1
-#define DEBUG_PRINT(info) kvs_debug_info(info)
+#define DEBUG_PRINT_S(info) kvs_debug_info_s(info)
+#define DEBUG_PRINT_D(info) kvs_debug_info_d(info)
 #else
-#define DEBUG_PRINT(info)
+#define DEBUG_PRINT_S(info)
+#define DEBUG_PRINT_D(info)
 #endif
 
 /* memeroy */
-#define K_TABLE_INIT(kpoint) kvs_table_init(kpoint);
-#define K_TABLE_MALLOC() kvs_table_malloc();
-#define K_TABLE_FREE(kpoint) kvs_table_free(kpoint);
+#define K_TABLE_INIT(table) kvs_table_init(table)
+#define K_TABLE_MALLOC() kvs_table_malloc()
+#define K_TABLE_FREE(kpoint) kvs_table_free(kpoint)
 #define DEFAULT_HASH_CONTAINER 16
 
 /* error keyword */
