@@ -16,6 +16,7 @@
 #define null NULL
 #define K_IS_NULL(x) (x==K_NULL)
 #define EPOLL_CREATE_SIZE 256
+#define KEY_LEN 16
 
 /* debug flag */
 #define DEBUG 1

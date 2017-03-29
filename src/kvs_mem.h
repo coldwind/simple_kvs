@@ -1,6 +1,11 @@
+typedef struct kvs_mem_key {
+    char key[KEY_LEN]; 
+    uint32_t len;
+} kvs_mem_key;
+
 typedef struct kvs_mem_data {
     struct kvs_mem_data *next;
-    char *key;
+    char key[KEY_LEN];
     void *val;
 } kvs_mem_data;
 
@@ -24,7 +29,8 @@ void kvs_table_free(void *);
 void kvs_table_init(KVS_TABLE **);
 void kvs_table_set(char *, void *);
 void *kvs_table_get(char *);
-void kvs_table_remove(char *);
+short kvs_table_remove(char *);
 static uint32_t kvs_get_index(char *key);
 
 extern uint32_t container_size;
+extern KVS_TABLE *kvs_table;

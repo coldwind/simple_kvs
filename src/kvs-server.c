@@ -27,6 +27,7 @@ int main()
 
     // init memory
     K_TABLE_INIT(&kvs_table);
+    kvs_table_set("machao", "mamama");
 
     // init network
     if (strcmp(protocol, K_P_TCP) == 0)

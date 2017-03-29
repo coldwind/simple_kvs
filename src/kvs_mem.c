@@ -19,16 +19,16 @@ void kvs_table_free(void *mp)
 void kvs_table_init(KVS_TABLE **kv_table)
 {
     DEBUG_PRINT_S("mem init");
+    int i = 0;
     *kv_table = (KVS_TABLE *)K_TABLE_MALLOC();
     (*kv_table)->count = 0;
     (*kv_table)->vector_size = DEFAULT_HASH_CONTAINER;
 
-    for (int i = 0; i < DEFAULT_HASH_CONTAINER; i++)
+    for (; i < DEFAULT_HASH_CONTAINER; i++)
     {
-        *kv_table->data[i] = kvs_node_malloc();
-        *kv_table->data[i]->key = K_NULL;
-        *kv_table->data[i]->val = K_NULL;
-        *kv_table->data[i]->next = K_NULL;
+        (*kv_table)->data[i] = kvs_node_malloc();
+        (*kv_table)->data[i]->val = K_NULL;
+        (*kv_table)->data[i]->next = K_NULL;
     }
     DEBUG_PRINT_S("mem init");
     DEBUG_PRINT_D((*kv_table)->vector_size);
@@ -39,10 +39,9 @@ void kvs_table_set(char *name, void *value)
     uint32_t index = kvs_get_index(name);
 
     // check table
-    kvs_mem_data *temp_data;
+    kvs_mem_data *temp_data = kvs_table->data[index];
     do {
-        temp_data = kvs_table->data[index];
-        if (temp_data->key == K_NULL)
+        if (temp_data->next == K_NULL)
         {
             kvs_table->data[index] = kvs_node_malloc();
             kvs_table->data[index]->next = temp_data;
@@ -50,6 +49,15 @@ void kvs_table_set(char *name, void *value)
             strcpy(kvs_table->data[index]->key, name);
             strcpy(kvs_table->data[index]->val, (char *)value);
             break;
+        }
+        else if (strcmp(temp_data->key, name) == 0)
+        {
+            strcpy(temp_data->val, value);
+            break;
+        }
+        else
+        {
+            temp_data = temp_data->next;
         }
     }
     while (1);
@@ -61,13 +69,62 @@ void *kvs_table_get(char *name)
 
     if (index >= container_size)
     {
-        return 0;
+        return K_NULL;
     }
+
+    kvs_mem_data *temp_data = kvs_table->data[index];
+    do {
+        if (temp_data->next == K_NULL)
+        {
+            return K_NULL;
+        }
+
+        if (strcmp(temp_data->key, name) == 0)
+        {
+            break;
+        }
+        else
+        {
+            temp_data = temp_data->next;
+        }
+    }
+    while (1);
+
+    return temp_data->val;
 }
 
-void kvs_table_remove(char *name)
+short kvs_table_remove(char *name)
 {
     uint32_t index = kvs_get_index(name);
+
+    if (index >= container_size)
+    {
+        return 0;
+    }
+
+    kvs_mem_data *temp_data = kvs_table->data[index];
+    kvs_mem_data *temp_prev_data = kvs_table->data[index];
+    do {
+        if (temp_data->next == K_NULL)
+        {
+            return 0;
+        }
+
+        if (strcmp(temp_data->key, name) == 0)
+        {
+            temp_prev_data->next = temp_data->next;
+            kvs_table_free(temp_data);
+            break;
+        }
+        else
+        {
+            temp_prev_data = temp_data;
+            temp_data = temp_data->next;
+        }
+    }
+    while (1);
+
+    return 1;
 }
 
 static uint32_t kvs_get_index(char *key)
