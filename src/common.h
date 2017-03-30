@@ -18,6 +18,11 @@
 #define EPOLL_CREATE_SIZE 256
 #define KEY_LEN 16
 
+// 定义内存存储数据类型
+#define KVS_TYPE_NONE 0
+#define KVS_TYPE_STRING 1
+#define KVS_TYPE_DOUBLE 2
+
 /* debug flag */
 #define DEBUG 1
 
